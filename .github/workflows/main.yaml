@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+    pod-lib-lint:
+        runs-on: macos-14
+        steps:
+        - uses: actions/checkout@v4
+        
+        - name: Build target
+          run: swift build
+        
+        - name: Run unit test target
+          run: swift test --enable-code-coverage
